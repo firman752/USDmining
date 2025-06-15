@@ -1,0 +1,956 @@
+ <!DOCTYPE html>
+<html lang="id">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USD Mining Futuristik</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(160deg, #0f172a, #1e293b);
+      color: #fff;
+    }
+    .page { display: none; padding: 20px; animation: fade 0.5s; }
+    .active { display: block; }
+    h2 { text-align: center; margin-bottom: 20px; }
+    input, button, select {
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      background: #1e293b;
+      color: #fff;
+      box-shadow: 0 0 10px #0ff3ff40;
+    }
+    button {
+      background: #10b981;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+    button:hover { background: #059669; }
+    .nav-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      background: #1f2937ee;
+      backdrop-filter: blur(6px);
+      border-top: 1px solid #4b5563;
+      z-index: 1000;
+    }
+    .nav-bar button {
+      flex: 1;
+      padding: 14px 0;
+      font-size: 20px;
+      border: none;
+      background: transparent;
+      color: #94a3b8;
+    }
+    .nav-bar button.active { color: #10b981; }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Login -->
+<div id="login" class="page active">
+<html lang="id">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - USD Mining</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #0d0d12;
+      font-family: 'Segoe UI', sans-serif;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .login-box {
+      background-color: #1a1a24;
+      padding: 24px;
+      border-radius: 12px;
+      box-shadow: 0 0 12px rgba(0,0,0,0.4);
+      width: 90%;
+      max-width: 350px;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+      border: none;
+      background-color: #2b2b38;
+      color: white;
+      font-size: 14px;
+    }
+    input::placeholder {
+      color: #aaa;
+    }
+    .captcha-box {
+      background-color: #fff;
+      color: #000;
+      text-align: center;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      letter-spacing: 2px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 20px;
+      background-color: #00aa99;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #00887a;
+    }
+    .info {
+      text-align: center;
+      font-size: 12px;
+      color: #bbb;
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-box">
+    <h2>Login / Daftar</h2>
+    <form id="loginForm" onsubmit="return handleLogin(event)">
+      <input type="text" id="emailOrPhone" placeholder="Email atau No. HP" required />
+      <input type="password" id="password" placeholder="Kata Sandi" required />
+      <div class="captcha-box" id="captchaText">ABC123</div>
+      <input type="text" id="captchaInput" placeholder="Masukkan Kode Captcha" required />
+      <input type="text" id="inviteCode" placeholder="Kode Undangan (opsional)" />
+      <button type="submit">Masuk</button>
+    </form>
+    <div class="info">
+      Dengan masuk, Anda menyetujui semua syarat & kebijakan penggunaan aplikasi.
+    </div>
+  </div>
+  <script>
+    // Buat captcha random saat halaman dibuka
+    function generateCaptcha() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let result = '';
+      for (let i = 0; i < 6; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+    const captcha = generateCaptcha();
+    document.getElementById('captchaText').innerText = captcha;
+    function handleLogin(event) {
+      event.preventDefault();
+      const emailOrPhone = document.getElementById("emailOrPhone").value.trim();
+      const password = document.getElementById("password").value.trim();
+      const captchaInput = document.getElementById("captchaInput").value.trim();
+      if (!emailOrPhone || !password || !captchaInput) {
+        alert("Harap lengkapi semua kolom yang wajib diisi.");
+        return false;
+      }
+      if (captchaInput !== captcha) {
+        alert("Kode Captcha salah!");
+        return false;
+      }
+      alert("Login berhasil!");
+      // Arahkan ke halaman berikutnya
+      window.location.href = "home.html";
+      return true;
+    }
+  </script>
+</div>
+
+<!-- Home -->
+<div id="home" class="page">
+<html lang="id">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>USD Miner - Home</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #0f172a;
+      color: #fff;
+      overflow-x: hidden;
+    }
+    .header {
+      background: #0f172a;
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .profile-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: url('https://i.ibb.co/J3qL3WZ/avatar.png') center/cover no-repeat;
+    }
+    .icons {
+      display: flex;
+      gap: 16px;
+    }
+    .icons svg {
+      width: 24px;
+      height: 24px;
+      color: #fff;
+      cursor: pointer;
+    }
+    .balance-section {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(135deg, rgba(0,212,255,0.3), rgba(9,9,121,0.3));
+      border-radius: 16px;
+      margin: 16px;
+      backdrop-filter: blur(10px);
+    }
+    .highlight {
+      font-size: 42px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #00ffc3, #00aeff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 8px;
+    }
+    .rate {
+      color: #00ffc3;
+      font-weight: bold;
+      margin-top: 6px;
+    }
+    .mine-button {
+      background: linear-gradient(90deg, #10b981, #34d399);
+      border: none;
+      color: #fff;
+      font-size: 20px;
+      font-weight: bold;
+      padding: 16px 32px;
+      border-radius: 50px;
+      margin: 24px auto;
+      display: block;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.3s;
+    }
+    .mine-button:active {
+      transform: scale(0.95);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+    }
+    .progress-container {
+      background: #1e293b;
+      border-radius: 12px;
+      margin: 16px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 10px;
+      background: linear-gradient(90deg, #34d399, #22d3ee);
+      width: 0%;
+      transition: width 0.5s;
+    }
+    .bonus-section {
+      margin: 16px;
+      text-align: center;
+    }
+    .bonus-section button {
+      background: linear-gradient(90deg, #f59e0b, #fbbf24);
+      border: none;
+      padding: 10px 24px;
+      color: #111;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .stats-section {
+      margin: 16px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      padding: 12px;
+      backdrop-filter: blur(8px);
+    }
+    .stats-item {
+      display: flex;
+      justify-content: space-between;
+      margin: 6px 0;
+      font-size: 14px;
+      color: #cbd5e1;
+    }
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-around;
+      background: #1e293b;
+      padding: 8px 0;
+      border-top: 1px solid #334155;
+    }
+    .bottom-nav svg {
+      width: 24px;
+      height: 24px;
+      color: #94a3b8;
+    }
+  </style>
+</head>
+</body>
+  <div class="header">
+    <div class="profile-info">
+      <div class="avatar"></div>
+      <div>
+        <div><strong>USD MINING</strong></div>
+        <small>welcome to miner</small>
+      </div>
+    </div>
+    <div class="icons">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V4a2 2 0 10-4 0v1.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </div>
+  </div>
+  <div class="balance-section">
+    <div>CURRENT BALANCE</div>
+    <div class="highlight" id="balance">0.0000000 USDC</div>
+    <div class="rate">+ <span id="rate">0.000005</span> USDC / S</div>
+  </div>
+  <button class="mine-button" id="startBtn" onclick="toggleMining()">⛏️ Start Mining</button>
+  <div class="progress-container">
+    <div class="progress-bar" id="progressBar"></div>
+  </div>
+  <div class="bonus-section">
+    <button onclick="claimBonus()">🎁 Tonton Iklan Untuk Bonus</button>
+  </div>
+  <div class="stats-section">
+    <div class="stats-item"><span>👥 Total Pengguna</span><span id="totalUsers">+92,345</span></div>
+    <div class="stats-item"><span>💸 Total Penarikan</span><span id="totalWithdraw">$350,245.00</span></div>
+    <div class="stats-item"><span>⚡ Total Kecepatan Mining</span><span id="totalRate">1.257 USDC/S</span></div>
+    <div class="stats-item"><span>🛒 Total Pembelian</span><span id="totalPurchase">$270,512.00</span></div>
+  </div>
+  <div class="bottom-nav">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M13 5v6h6"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h18v6H3V3zm0 8h18v10H3V11z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4h16v16H4V4z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 7.292M12 12v.01M12 16h.01M12 20h.01"/></svg>
+  </div>
+  <script>
+    let saldo = parseFloat(localStorage.getItem("saldo")) || 0;
+    let rate = parseFloat(localStorage.getItem("rate")) || 0.000005;
+    let seconds = parseInt(localStorage.getItem("seconds")) || 0;
+    let interval = null;
+    function updateDisplay() {
+      document.getElementById("balance").innerText = saldo.toFixed(6) + " USDC";
+      document.getElementById("rate").innerText = rate.toFixed(6);
+      const progress = Math.min((seconds % 86400) / 86400 * 100, 100);
+      document.getElementById("progressBar").style.width = progress + "%";
+    }
+    function toggleMining() {
+      const btn = document.getElementById("startBtn");
+      if (interval) {
+        clearInterval(interval);
+        interval = null;
+        btn.innerText = "⛏️ Start Mining";
+      } else {
+        interval = setInterval(() => {
+          saldo += rate;
+          seconds++;
+          updateDisplay();
+          localStorage.setItem("saldo", saldo);
+          localStorage.setItem("seconds", seconds);
+        }, 1000);
+        btn.innerText = "⏸️ Pause Mining";
+      }
+    }
+    function claimBonus() {
+      saldo += 0.05;
+      updateDisplay();
+      localStorage.setItem("saldo", saldo);
+      alert("Bonus $0.05 berhasil ditambahkan!");
+    }
+    updateDisplay();
+</script>
+</div>
+
+<!-- Store -->
+<div id="store" class="page">
+<html lang="id">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upgrade Mining</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #fff;
+    }
+    .container {
+      padding: 20px;
+      max-width: 350px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      color: #22d3ee;
+    }
+    .stats {
+      background: rgba(255, 255, 255, 0.05);
+      padding: 12px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      justify-content: space-around;
+      text-align: center;
+    }
+    .stats div {
+      font-size: 14px;
+    }
+    .stats strong {
+      display: block;
+      font-size: 16px;
+      color: #0ff;
+    }
+    .package {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+    .package h3 {
+      margin: 0;
+      color: #f0fdfa;
+    }
+    .price {
+      color: #f59e0b;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+    .btn {
+      background: linear-gradient(90deg, #10b981, #34d399);
+      color: #fff;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      width: 100%;
+      cursor: pointer;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+    .btn:hover {
+      opacity: 0.9;
+    }
+    .scrolling {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      padding: 10px;
+      overflow: hidden;
+      position: relative;
+      height: 30px;
+    }
+    .scrolling span {
+      position: absolute;
+      white-space: nowrap;
+      animation: scroll 25s linear infinite;
+    }
+    @keyframes scroll {
+      0% { left: 100%; }
+      100% { left: -100%; }
+    }
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      display: none;
+    }
+    .modal-content {
+      background: #1e293b;
+      padding: 20px;
+      border-radius: 10px;
+      width: 90%;
+      max-width: 400px;
+      color: #fff;
+    }
+    .modal-content input, .modal-content select {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 12px;
+      border-radius: 6px;
+      border: none;
+      font-size: 14px;
+    }
+    .modal-content button {
+      background: #22c55e;
+      border: none;
+      padding: 10px;
+      border-radius: 8px;
+      color: #fff;
+      width: 100%;
+      font-weight: bold;
+      cursor: pointer;
+    }
+  </style>
+</head>
+</body>
+<div class="container">
+  <h2>Upgrade Kecepatan Mining</h2>
+  <div class="stats">
+    <div><strong>2.431</strong>Total Pengguna</div>
+    <div><strong>$14.300</strong>Total Penarikan</div>
+    <div><strong>385</strong>Jumlah Pembelian</div>
+  </div>
+  <div class="package"><h3>15 GH/s</h3><div class="price">Rp15.900</div><button class="btn" onclick="openModal('15 GH/s', 15900)">Beli Sekarang</button></div>
+  <div class="package"><h3>25 GH/s</h3><div class="price">Rp200.000</div><button class="btn" onclick="openModal('25 GH/s', 200000)">Beli Sekarang</button></div>
+  <div class="package"><h3>35 GH/s</h3><div class="price">Rp250.000</div><button class="btn" onclick="openModal('35 GH/s', 250000)">Beli Sekarang</button></div>
+  <div class="package"><h3>45 GH/s</h3><div class="price">Rp270.000</div><button class="btn" onclick="openModal('45 GH/s', 270000)">Beli Sekarang</button></div>
+  <div class="package"><h3>55 GH/s</h3><div class="price">Rp350.000</div><button class="btn" onclick="openModal('55 GH/s', 350000)">Beli Sekarang</button></div>
+  <div class="package"><h3>65 GH/s</h3><div class="price">Rp380.000</div><button class="btn" onclick="openModal('65 GH/s', 380000)">Beli Sekarang</button></div>
+  <div class="package"><h3>75 GH/s</h3><div class="price">Rp62.000</div><button class="btn" onclick="openModal('75 GH/s', 62000)">Beli Sekarang</button></div>
+  <div class="package"><h3>100 GH/s</h3><div class="price">Rp500.000</div><button class="btn" onclick="openModal('100 GH/s', 500000)">Beli Sekarang</button></div>
+  <div class="package"><h3>200 GH/s</h3><div class="price">Rp700.000</div><button class="btn" onclick="openModal('200 GH/s', 700000)">Beli Sekarang</button></div>
+  <div class="package"><h3>1 TH/s</h3><div class="price">Rp1.200.000</div><button class="btn" onclick="openModal('1 TH/s', 1200000)">Beli Sekarang</button></div>
+  <div class="package"><h3>2 TH/s</h3><div class="price">Rp1.600.000</div><button class="btn" onclick="openModal('2 TH/s', 1600000)">Beli Sekarang</button></div>
+  <div class="package"><h3>5 TH/s</h3><div class="price">Rp3.000.000</div><button class="btn" onclick="openModal('5 TH/s', 3000000)">Beli Sekarang</button></div>
+  <div class="package"><h3>10 TH/s</h3><div class="price">Rp7.000.000</div><button class="btn" onclick="openModal('10 TH/s', 7000000)">Beli Sekarang</button></div>
+  <div class="package"><h3>30 TH/s</h3><div class="price">Rp15.000.000</div><button class="btn" onclick="openModal('30 TH/s', 15000000)">Beli Sekarang</button></div>
+  <div class="package"><h3>50 TH/s</h3><div class="price">Rp26.000.000</div><button class="btn" onclick="openModal('50 TH/s', 26000000)">Beli Sekarang</button></div>
+  <div class="package"><h3>80 TH/s</h3><div class="price">Rp52.000.000</div><button class="btn" onclick="openModal('80 TH/s', 52000000)">Beli Sekarang</button></div>
+</div>
+<div class="scrolling">
+  <span id="purchaseHistory">Memuat histori pembelian...</span>
+</div>
+<!-- Modal -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h3>Isi Data Pembelian</h3>
+    <input type="text" id="nama" placeholder="Nama Anda">
+    <select id="metode">
+      <option value="">Pilih Metode Pembayaran</option>
+      <option>Indodax</option>
+      <option>Pintu</option>
+      <option>PayPal</option>
+      <option>DANA</option>
+      <option>OVO</option>
+      <option>GoPay</option>
+      <option>LinkAja</option>
+      <option>BRI</option>
+      <option>BCA</option>
+      <option>BNI</option>
+      <option>CIMB Niaga</option>
+    </select>
+    <button onclick="sendWhatsApp()">Lanjut bayar</button>
+  </div>
+</div>
+<script>
+  const adminPhone = '6283847556444';
+  let selectedPackage = '';
+  let selectedPrice = 0;
+  function openModal(packageName, price) {
+    selectedPackage = packageName;
+    selectedPrice = price;
+    document.getElementById('modal').style.display = 'flex';
+  }
+  function sendWhatsApp() {
+    const nama = document.getElementById('nama').value.trim();
+    const metode = document.getElementById('metode').value;
+    if (!nama || !metode) {
+      alert('Harap isi nama dan pilih metode pembayaran.');
+      return;
+    }
+    const message = `Halo Admin, saya ingin membeli kecepatan mining:%0A%0A✅ Kecepatan: ${selectedPackage}%0A💰 Harga: Rp${selectedPrice.toLocaleString('id-ID')}%0A👤 Nama Pengirim: ${nama}%0A💳 Metode Pembayaran: ${metode}`;
+    window.open(`https://wa.me/${adminPhone}?text=${message}`, '_blank');
+    document.getElementById('modal').style.display = 'none';
+    document.getElementById('nama').value = '';
+    document.getElementById('metode').value = '';
+  }
+  function generatePurchaseHistory() {
+    const names = ['Andi','Rina','Joko','Toni','Sari','Ilham','Dina','Yudi','Putri','Ali'];
+    const history = [];
+    for (let i = 0; i < 30; i++) {
+      const name = names[Math.floor(Math.random() * names.length)] + Math.floor(Math.random() * 100);
+      const gh = Math.floor(Math.random() * (5000 - 100 + 1)) + 100;
+      history.push(`${name} membeli ${gh} GH/s`);
+    }
+    document.getElementById("purchaseHistory").innerText = history.join(" 🔸 ");
+  }
+  generatePurchaseHistory();
+      </script>
+      </div>
+      </div>
+      </div>
+
+<!-- Penarikan -->
+<div id="penarikan" class="page">
+<html lang="id">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Penarikan Dana</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #fff;
+    }
+    .container {
+      padding: 20px;
+      max-width: 600px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      color: #0ff;
+    }
+    .stats {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .stats div {
+      font-size: 13px;
+    }
+    .stats strong {
+      display: block;
+      font-size: 16px;
+      color: #0ff;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: bold;
+      color: #f0fdfa;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      border: 1px solid #334155;
+      background: #1e293b;
+      color: #fff;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .btn {
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: linear-gradient(90deg, #06b6d4, #3b82f6);
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      opacity: 0.9;
+    }
+    .marquee {
+      background: rgba(255, 255, 255, 0.08);
+      color: #fff;
+      padding: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      border-radius: 6px;
+      margin-bottom: 12px;
+    }
+    .marquee span {
+      display: inline-block;
+      padding-left: 100%;
+      animation: scroll 25s linear infinite;
+    }
+    @keyframes scroll {
+      100% { transform: translateX(-100%); }
+    }
+    .note {
+      font-size: 12px;
+      color: #a5f3fc;
+      text-align: center;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Penarikan Dana</h2>
+  <div class="stats">
+    <div><strong>11.215</strong>Pengguna Aktif</div>
+    <div><strong>$128.400</strong>Total Penarikan</div>
+    <div><strong>42.985</strong>Total Pembelian</div>
+  </div>
+  <div class="card">
+    <form id="withdrawForm" onsubmit="return handleWithdraw(event)">
+      <label for="method">Metode Penarikan</label>
+      <select id="method" required>
+        <option value="">Pilih Metode</option>
+        <option>DANA</option>
+        <option>OVO</option>
+        <option>GoPay</option>
+        <option>LinkAja</option>
+        <option>Indodax</option>
+        <option>Pintu</option>
+        <option>PayPal</option>
+        <option>BRI</option>
+        <option>BCA</option>
+        <option>BNI</option>
+        <option>CIMB Niaga</option>
+        <option>Amazon Gift Card</option>
+      </select>
+      <label for="wallet">Alamat Wallet / Nomor Tujuan</label>
+      <input type="text" id="wallet" placeholder="Contoh: 0857xxxxxxx atau alamat dompet" required>
+      <label for="amount">Jumlah (USD)</label>
+      <input type="number" id="amount" min="10" placeholder="Min. 10 USD" required>
+      <button class="btn" type="submit">Tarik Sekarang</button>
+    </form>
+  </div>
+  <div class="marquee">
+    <span id="withdrawHistory">Memuat histori penarikan...</span>
+  </div>
+  <div class="note">
+    ⚠️ *Catatan:* Permintaan penarikan diproses dalam waktu 5 sampai 15 menit. Pastikan data sudah benar.
+  </div>
+</div>
+<script>
+  function handleWithdraw(e) {
+    e.preventDefault();
+    const method = document.getElementById('method').value;
+    const wallet = document.getElementById('wallet').value;
+    const amount = document.getElementById('amount').value;
+
+    if (!method || !wallet || !amount || amount < 10) {
+      alert("Silakan isi data dengan benar. Minimal penarikan 10 USD.");
+      return false;
+    }
+    alert("Permintaan penarikan berhasil dikirim!");
+    document.getElementById('withdrawForm').reset();
+    return false;
+  }
+  function generateWithdrawHistory() {
+    const names = ['Andi', 'Rina', 'Joko', 'Toni', 'Sari', 'Ilham', 'Dina', 'Yudi', 'Putri', 'Ali'];
+    let history = [];
+    for (let i = 0; i < 50; i++) {
+      const name = names[Math.floor(Math.random() * names.length)] + Math.floor(Math.random() * 100);
+      const amount = (Math.random() * (800 - 10) + 10).toFixed(2);
+      history.push(`${name} menarik $${amount}`);
+    }
+    document.getElementById("withdrawHistory").innerText = history.join(" 🔸 ");
+  }
+  generateWithdrawHistory();
+</script>
+</div>
+</div>
+
+<!-- Pengaturan -->
+<div id="pengaturan" class="page">
+<html lang="id">
+<head>
+  <link rel="manifest" href="manifest.json">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pengaturan Akun</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #0f172a, #1e3a8a);
+      color: #f1f5f9;
+    }
+    .container {
+      padding: 20px;
+      max-width: 350px;
+      margin: auto;
+    }
+    h2 {
+      text-align: center;
+      color: #0ff;
+      margin-bottom: 20px;
+    }
+    .form-group {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    label {
+      display: block;
+      margin-top: 12px;
+      font-weight: 500;
+      color: #a5f3fc;
+    }
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 6px;
+      background: #1e293b;
+      color: #fff;
+      border: 1px solid #334155;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .btn {
+      width: 100%;
+      margin-top: 14px;
+      padding: 12px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+      font-size: 15px;
+    }
+    .btn-save {
+      background: linear-gradient(90deg, #06b6d4, #3b82f6);
+      color: white;
+    }
+    .btn-exit {
+      background: linear-gradient(90deg, #f59e0b, #f97316);
+      color: white;
+    }
+    .btn-delete {
+      background: linear-gradient(90deg, #ef4444, #dc2626);
+      color: white;
+    }
+    .btn:hover {
+      opacity: 0.9;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <h2>Pengaturan Akun</h2>
+  <div class="form-group">
+    <label for="fullname">Nama Lengkap</label>
+    <input type="text" id="fullname" placeholder="Masukkan nama lengkap Anda" />
+    <label for="bank">Bank Penarikan</label>
+    <input type="text" id="bank" placeholder="Contoh: BRI, BCA, DANA, dll" />
+    <label for="email">Email</label>
+    <input type="email" id="email" placeholder="Masukkan email Anda" />
+    <label for="refcode">Kode Undangan</label>
+    <input type="text" id="refcode" placeholder="Masukkan kode referal (opsional)" />
+    <label for="withdrawPin">PIN Penarikan (4-6 digit)</label>
+    <input type="password" id="withdrawPin" placeholder="Contoh: 123456" maxlength="6" minlength="4" />
+    <label for="language">Bahasa</label>
+    <select id="language">
+      <option>Indonesia</option>
+      <option>Inggris</option>
+      <option>Malaysia</option>
+      <option>Korea</option>
+      <option>Jepang</option>
+      <option>China</option>
+      <option>Kanada</option>
+      <option>Brazil</option>
+      <option>Arab</option>
+      <option>Singapura</option>
+    </select>
+    <button class="btn btn-save" onclick="saveSettings()">💾 Simpan Pengaturan</button>
+    <button class="btn btn-exit" onclick="logout()">🚪 Keluar Akun</button>
+    <button class="btn btn-delete" onclick="deleteAccount()">🗑️ Hapus Akun</button>
+    <button class="btn btn-save" onclick="addAccount()">➕ Tambahkan Akun</button>
+  </div>
+</div>
+<script>
+  function saveSettings() {
+    const name = document.getElementById('fullname').value;
+    const bank = document.getElementById('bank').value;
+    const email = document.getElementById('email').value;
+    const code = document.getElementById('refcode').value;
+    const pin = document.getElementById('withdrawPin').value;
+    const lang = document.getElementById('language').value;
+
+    if (pin.length < 4 || pin.length > 6 || isNaN(pin)) {
+      alert("❗ PIN harus berupa 4 sampai 6 digit angka.");
+      return;
+    }
+    alert(`✅ Pengaturan disimpan!\n\nNama: ${name}\nBank: ${bank}\nEmail: ${email}\nPIN: ${pin}\nKode: ${code}\nBahasa: ${lang}`);
+    // TODO: Simpan ke localStorage atau API backend
+  }
+  function logout() {
+    alert("Anda telah keluar.");
+    window.location.href = "login.html";
+  }
+  function deleteAccount() {
+    if (confirm("Apakah Anda yakin ingin menghapus akun ini?")) {
+      alert("Akun berhasil dihapus.");
+      localStorage.clear();
+      window.location.href = "login.html";
+    }
+  }
+  function addAccount() {
+    alert("Silakan buat akun baru di halaman pendaftaran.");
+    window.location.href = "register.html";
+  }
+</script>
+</div>
+
+<!-- Navigasi Futuristik -->
+<nav class="nav-bar">
+  <button onclick="showPage('home')">🏠</button>
+  <button onclick="showPage('store')">🛒</button>
+  <button onclick="showPage('penarikan')">💸</button>
+  <button onclick="showPage('pengaturan')">⚙️</button>
+</nav>
+<script>
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.querySelectorAll('.nav-bar button').forEach(btn => btn.classList.remove('active'));
+  document.querySelectorAll('.nav-bar button').forEach(btn => {
+    if (btn.getAttribute('onclick').includes(id)) btn.classList.add('active');
+  });
+}
+</script>
+
+</body>
+</html>
